@@ -7,9 +7,13 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
+    path: 'h',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: '',
+    loadChildren: () => import('./slides/slides.module').then( m => m.SlidesPageModule)
   },
 ];
 
