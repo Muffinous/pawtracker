@@ -35,7 +35,6 @@ export class SlidesPage implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.data[0].img);
   }
 
 afterslidesLoad(slides) {

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+ 
+  <ion-segment [(ngModel)]="selectedView">
+    <ion-segment-button value="devs">
+      <ion-label>User</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+ 
+  <div [ngSwitch]="selectedView">
+    <div *ngSwitchCase="'users'">
+      <ion-item>
+        <ion-label position="stacked">What\'s your name?</ion-label>
+        <ion-input [(ngModel)]="user.name" placeholder="User Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">What are your special skills (comma separated)?</ion-label>
+        <ion-input [(ngModel)]="user.age" placeholder="Special Skills"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="addUser()">Add Developer Info</ion-button>
+ 
+      <ion-list>
+        <ion-item button *ngFor="let user of users" [routerLink]="['/', 'users', user.id]">
+          <ion-label>
+            <h2>{{ user.name }}</h2>
+            <p>{{ user.age }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+ 
+</ion-content>

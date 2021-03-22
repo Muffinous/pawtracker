@@ -1,7 +1,10 @@
 {
   "name": "pawtracker",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular",
   "id": "33423877"
