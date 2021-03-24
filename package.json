@@ -21,6 +21,8 @@
     "@angular/router": "~11.2.0",
     "@capacitor-community/sqlite": "^2.9.13",
     "@capacitor/android": "^2.4.7",
+    "@capacitor/cli": "^2.4.7",
+    "@capacitor/core": "^2.4.7",
     "@capacitor/ios": "^2.4.7",
     "@ionic-native/sqlite": "^5.31.1",
     "@ionic-native/sqlite-porter": "^5.31.1",

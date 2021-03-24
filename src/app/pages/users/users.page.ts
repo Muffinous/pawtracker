@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DatabaseService } from 'src/app/services/database.service';
+// import { DatabaseService } from 'src/app/services/database.service';
 import { User } from '../../models/user';
 
 @Component({
@@ -16,26 +16,26 @@ export class UsersPage implements OnInit {
 
   selectedView = 'users';
 
-  constructor(private db: DatabaseService) { }
-
+ // constructor(private db: DatabaseService) { }
+  constructor() {}
   ngOnInit() {
-    console.log("database state", this.db.getDatabaseState);
+    // console.log("database state", this.db.getDatabaseState);
     
-    this.db.getDatabaseState().subscribe(ready => {
-      if (ready) {
-        this.db.getUsers().subscribe(data => {
-          console.log('users: ', data);
-          this.users = data;
-        });
-      }
-    })
+    // this.db.getDatabaseState().subscribe(ready => {
+    //   if (ready) {
+    //     this.db.getUsers().subscribe(data => {
+    //       console.log('users: ', data);
+    //       this.users = data;
+    //     });
+    //   }
+    // })
   }
 
-  addUser() {
-    this.db.addUser(this.user['name'], this.user['age'])
-    .then(_ => {
-      this.user = {};
-    });
-  }
+  // addUser() {
+  //   this.db.addUser(this.user['name'], this.user['age'])
+  //   .then(_ => {
+  //     this.user = {};
+  //   });
+  // }
 
 }

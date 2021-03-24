@@ -1,5 +1,6 @@
 import { Component, ContentChild, OnInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
+import {Router} from '@angular/router'; 
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
 
   @ContentChild(IonInput) input: IonInput;
 
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit() {
   }
@@ -27,5 +28,6 @@ export class LoginPage implements OnInit {
     console.log('submitted');
     console.log(this.username);
     console.log(this.password);
+    this.route.navigate(['/home']);
   }
 }
