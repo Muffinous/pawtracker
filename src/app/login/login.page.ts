@@ -29,5 +29,6 @@ export class LoginPage implements OnInit {
     console.log(this.username);
     console.log(this.password);
     this.route.navigate(['/home']);
+    console.log('navigate');
   }
 }

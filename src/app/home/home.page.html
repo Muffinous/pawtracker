@@ -30,6 +30,7 @@
     </ion-menu>
 
     <div class="ion-page" id="main-content">
+
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="end">
@@ -38,18 +39,60 @@
           <ion-title>PawTracker</ion-title>
         </ion-toolbar>
       </ion-header>
+
       <ion-content class="ion-padding">
         <ion-card>
-            <!-- <img src="./madison.jpg" /> -->
-            <ion-card-header>
-              <ion-icon slot="start" [[ios]="location-outline'" [md]="location.icon + '-sharp'"></ion-icon>
-              <ion-card-title>Where are my buddies?</ion-card-title>              
-              <ion-card-subtitle>Locate them in real time</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-              Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-            </ion-card-content>
-          </ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-icon name="navigate"></ion-icon>
+              Where are my buddies?
+            </ion-card-title>              
+            <ion-card-subtitle>Locate them in real time</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="transparent-card">
+            <div id="map" style="height: 150px;"></div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-icon name="navigate"></ion-icon>
+              Appointments
+            </ion-card-title>              
+            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="transparent-card">
+            <div></div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-icon name="navigate"></ion-icon>
+              Sleep
+            </ion-card-title>              
+            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="transparent-card">
+            <div></div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-icon name="navigate"></ion-icon>
+              Walking
+            </ion-card-title>              
+            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="transparent-card">
+            <div></div>
+          </ion-card-content>
+        </ion-card>
       </ion-content>
+
     </div>
   </ion-app>
