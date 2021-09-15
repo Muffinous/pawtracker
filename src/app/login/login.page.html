@@ -23,14 +23,14 @@
                 </div>
                 <div padding>
                   <ion-item>
-                    <ion-icon name="logo-octocat"></ion-icon>
                     <ion-input [(ngModel)]="username" name="username" type="text" placeholder="username" required></ion-input>
+                    <ion-icon name="logo-octocat"></ion-icon>
                   </ion-item>
                 </div>
                 <div linespace></div>
                   <ion-item>
+                    <ion-input [(ngModel)]="password" name="password" [type]="showPassword ? 'text' : 'password' " placeholder="Password" required></ion-input>                    
                     <ion-icon [name]="passwordToggleIcon" (click)="toggleShow()"></ion-icon>
-                    <ion-input [(ngModel)]="password" name="password" [type]="showPassword ? 'text' : 'password' " placeholder="Password" required></ion-input>
                   </ion-item>
                 <div linespace></div>
                 <div padding>

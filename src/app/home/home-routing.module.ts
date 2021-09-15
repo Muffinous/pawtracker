@@ -6,6 +6,31 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children: [
+      {
+        path: 'index',
+        loadChildren: () => import('./index/index.module').then( m => m.IndexPageModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'index',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: 'home',
+    redirectTo: 'index',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full'
   }
 ];
 

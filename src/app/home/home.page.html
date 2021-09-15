@@ -30,7 +30,6 @@
     </ion-menu>
 
     <div class="ion-page" id="main-content">
-
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="end">
@@ -40,59 +39,26 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content class="ion-padding">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-icon name="navigate"></ion-icon>
-              Where are my buddies?
-            </ion-card-title>              
-            <ion-card-subtitle>Locate them in real time</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="transparent-card">
-            <div id="map" style="height: 150px;"></div>
-          </ion-card-content>
-        </ion-card>
 
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-icon name="navigate"></ion-icon>
-              Appointments
-            </ion-card-title>              
-            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="transparent-card">
-            <div></div>
-          </ion-card-content>
-        </ion-card>
 
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-icon name="navigate"></ion-icon>
-              Sleep
-            </ion-card-title>              
-            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="transparent-card">
-            <div></div>
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-icon name="navigate"></ion-icon>
-              Walking
-            </ion-card-title>              
-            <ion-card-subtitle>blah blah blah</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="transparent-card">
-            <div></div>
-          </ion-card-content>
-        </ion-card>
-      </ion-content>
-
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="home">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+            <!-- <ion-badge>6</ion-badge> -->
+          </ion-tab-button>
+      
+          <ion-tab-button tab="map">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Map</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button tab="profile">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
     </div>
   </ion-app>

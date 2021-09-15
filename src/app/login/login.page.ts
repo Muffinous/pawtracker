@@ -1,6 +1,7 @@
 import { Component, ContentChild, OnInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import {Router} from '@angular/router'; 
+import { off } from 'process';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
   showPassword = false;
-  passwordToggleIcon = 'eye';
+  passwordToggleIcon;
   username: string;
   password: string;
 
@@ -18,10 +19,17 @@ export class LoginPage implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit() {
+    this.passwordToggleIcon = 'eye';
   }
 
   toggleShow() {
     this.showPassword = !this.showPassword;
+    if (this.passwordToggleIcon === 'eye') {
+          this.passwordToggleIcon = 'eye-off';
+    } else {
+      console.log('not eye');
+      this.passwordToggleIcon = 'eye';
+    }
   }
   
   login(){

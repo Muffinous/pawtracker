@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'user/:id',
     loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
-  },
+  }
 ];
 
 @NgModule({
