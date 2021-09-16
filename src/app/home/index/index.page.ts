@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar';
 import locale from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
+import { formatDate, registerLocaleData } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertController, ModalController } from '@ionic/angular';
+import { CalModalPage } from '../cal-modal/cal-modal.page';
 
 declare var google;
 
@@ -30,8 +32,10 @@ export class IndexPage implements OnInit {
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
   // calendar shit
-  
-  constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore) {
+
+  public modalController: ModalController
+
+  constructor(private db: AngularFirestore,private alertCtrl: AlertController, private modalCtrl: ModalController, @Inject(LOCALE_ID) private locale: string,  ) {
     this.db.collection(`events`).snapshotChanges().subscribe(colSnap => {
       this.eventSource = [];
       colSnap.forEach(snap => {
@@ -39,7 +43,7 @@ export class IndexPage implements OnInit {
         event.id = snap.payload.doc['id'];
         this.eventSource.push(event);
       });
-    });
+    });  
   }
 
   ngOnInit() {
@@ -68,7 +72,7 @@ export class IndexPage implements OnInit {
   }
 
   onEventSelected(event) {
-    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title); 
   }
 
   onTimeSelected(ev) {
@@ -84,17 +88,61 @@ export class IndexPage implements OnInit {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
 
-  addNewEvent() {
-    let now = new Date();
-    let end = new Date();
-    end.setMinutes(end.getMinutes() + 60);
-    let event = {
-    title: 'Event #' + now.getMinutes(), 
-    startTime: now,
-    endTime: end,
-    allDay: true
-    }
+  async openCalModal() {
+    const modal = await this.modalCtrl.create({
+      component: CalModalPage,
+      cssClass: 'cal-modal',
+      backdropDismiss: false
+    });
+   
+    await modal.present();
+   
+    modal.onDidDismiss().then((result) => {
+      if (result.data && result.data.event) {
+        let event = result.data.event;
+        if (event.allDay) {
+          let start = event.startTime;
+          event.startTime = new Date(
+            Date.UTC(
+              start.getUTCFullYear(),
+              start.getUTCMonth(),
+              start.getUTCDate()
+            )
+          );
+          event.endTime = new Date(
+            Date.UTC(
+              start.getUTCFullYear(),
+              start.getUTCMonth(),
+              start.getUTCDate() + 1
+            )
+          );
+        }
+        this.eventSource.push(result.data.event);
+        this.myCal.loadEvents();
+      }
+    });
+  }
+  async addNewEvent(event) {
+
+    let now = formatDate(new Date(), "medium", this.locale);
+    let end = formatDate(new Date(), "medium", this.locale);
+
+    const alert = await this.alertCtrl.create({
+      header: event.title,
+      subHeader: event.desc,
+      message: 'From: ' + now + '<br><br>To: ' + end,
+      buttons: ['OK'],
+    });
+    alert.present();
+
+    // end.setMinutes(end.getMinutes() + 60);
+    // let event = {
+    // title: 'Event #' + now.getMinutes(), 
+    // startTime: now,
+    // endTime: end,
+    // allDay: true
+    // }
     console.log(event);
-    this.db.collection(`events`).add(event);
+ //   this.db.collection(`events`).add(event);
   }
 }

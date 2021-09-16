@@ -31,6 +31,14 @@ const routes: Routes = [
     path: '',
     redirectTo: 'index',
     pathMatch: 'full'
+  },
+  {
+    path: 'cal-modal-page',
+    loadChildren: () => import('./cal-modal-page/cal-modal-page.module').then( m => m.CalModalPagePageModule)
+  },
+  {
+    path: 'cal-modal',
+    loadChildren: () => import('./cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
   }
 ];
 
