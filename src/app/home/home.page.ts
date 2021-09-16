@@ -18,7 +18,7 @@ export class HomePage implements OnInit{
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     // this.loadMap();
   }
 
@@ -30,7 +30,7 @@ export class HomePage implements OnInit{
     { title: 'Sign out', url: '/folder/Trash', icon: 'log-out' },
   ];
 
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];  
+  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];  
 
 
   // loadMap() {

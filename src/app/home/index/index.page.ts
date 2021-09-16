@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
+import { CalendarComponent } from 'ionic2-calendar';
+import locale from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare var google;
 
@@ -13,28 +17,35 @@ export class IndexPage implements OnInit {
   @ViewChild('mapElement') mapElement;
   public folder: string;
   rootPage:any = 'TabsPage';
-
-  tabHome = 'home';
-  tabMap = 'map';
-  tabProfile = 'profile';
   
-  constructor(private activatedRoute: ActivatedRoute) { }
+  // calendar shit
+  eventSource = []; 
+  viewTitle: string;
 
-  ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.loadMap();
+  calendar = {
+    mode: 'month',
+    currentDate: new Date()
+  }
+  selectedDate = new Date();
+
+  @ViewChild(CalendarComponent) myCal: CalendarComponent;
+  // calendar shit
+  
+  constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore) {
+    this.db.collection(`events`).snapshotChanges().subscribe(colSnap => {
+      this.eventSource = [];
+      colSnap.forEach(snap => {
+        let event:any = snap.payload.doc.data();
+        event.id = snap.payload.doc['id'];
+        this.eventSource.push(event);
+      });
+    });
   }
 
-  public appPages = [
-    { title: 'My profile', url: '/profile', icon: 'person' },
-    { title: 'Buddies', url: '/folder/Outbox', icon: 'paw' },
-    { title: 'Settings', url: '/folder/Favorites', icon: 'settings' },
-    { title: 'Dark mode', url: '/folder/Archived', icon: 'toggle' },
-    { title: 'Sign out', url: '/folder/Trash', icon: 'log-out' },
-  ];
-
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];  
-
+  ngOnInit() {
+    registerLocaleData(locale);
+    this.loadMap();
+  }
 
   loadMap() {
     const mapEle: HTMLElement = document.getElementById('map');
@@ -48,5 +59,42 @@ export class IndexPage implements OnInit {
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
     });
+  }
+
+  // calendar events
+
+  onViewTitleChanged(title) {
+    console.log(title);
+  }
+
+  onEventSelected(event) {
+    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+  }
+
+  onTimeSelected(ev) {
+    console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
+      (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+  }
+
+  onCurrentDateChanged(event: Date) {
+    console.log('current date change: ' + event);
+  }
+
+  onRangeChanged(ev) {
+    console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
+  }
+
+  addNewEvent() {
+    let now = new Date();
+    let end = new Date();
+    end.setMinutes(end.getMinutes() + 60);
+    let event = {
+    title: 'Event #' + now.getMinutes(), 
+    startTime: now,
+    endTime: end,
+    allDay: true
+    }
+    console.log(event);
+    this.db.collection(`events`).add(event);
   }
 }
