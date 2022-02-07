@@ -1,5 +1,4 @@
 import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar';
 import locale from '@angular/common/locales/es';
 import { formatDate, registerLocaleData } from '@angular/common';

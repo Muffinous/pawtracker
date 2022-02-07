@@ -33,17 +33,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'cal-modal-page',
-    loadChildren: () => import('./cal-modal-page/cal-modal-page.module').then( m => m.CalModalPagePageModule)
-  },
-  {
     path: 'cal-modal',
     loadChildren: () => import('./cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class HomePageRoutingModule {}
